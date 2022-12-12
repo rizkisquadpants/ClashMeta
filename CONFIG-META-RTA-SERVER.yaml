@@ -1,0 +1,345 @@
+# =====================================================
+#CONFIG OPENCLASH META OPENWRT 2 ISP BY RTA SERVER
+#LAST UPDATE : 10 DESEMBER 2022
+# =====================================================
+
+
+# ================ RULE PROVIDERS SETTING
+rule-providers:
+  RP-Direct:
+    type: file
+    behavior: classical
+    path: "./rule_provider/rp-direct.yaml"
+  RP-Reject:
+    type: file
+    behavior: classical
+    path: "./rule_provider/rp-reject.yaml"
+  RP-PortGame:
+    type: file
+    behavior: classical
+    path: "./rule_provider/rp-portgame.yaml"
+  RP-Indo:
+    type: file
+    behavior: classical
+    path: "./rule_provider/rp-indo.yaml"
+# ================ RULE PROVIDERS SETTING
+
+# ================ PROXY PROVIDERS SETTING
+proxy-providers:
+  PP-Indo:
+    type: file
+    path: "./proxy_provider/pp-indo.yaml"
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 180
+  PP-BROWSING:
+    type: file
+    path: "./proxy_provider/pp-browsing.yaml"
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 180
+  PP-Gaming:
+    type: file
+    path: "./proxy_provider/pp-gaming.yaml"
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 180
+# ================ PROXY PROVIDERS SETTING
+
+# ================ PROXY GROUPS SETTING
+proxy-groups:
+# ======== DIRECT SETTING
+- name: ✔️ Direct Mode
+  type: select
+  disable-udp: false
+  proxies:
+  - DIRECT ISP1
+  - DIRECT ISP2
+  - 🔰 Browsing 🔰
+# ======== DIRECT SETTING
+
+# ======== INDO ONLY SETTING
+- name: ❤️️ INDO ONLY
+  type: load-balance
+  strategy: round-robin
+  disable-udp: false
+  use:
+  - PP-Indo
+  url: http://www.gstatic.com/generate_204
+  interval: '30'
+# ======== INDO ONLY SETTING
+
+# ======== GAMING SETTING
+- name: 🎮 Gaming UDP
+  type: select
+  disable-udp: false
+  proxies:
+  - DIRECT ISP1
+  - DIRECT ISP2
+  use:
+  - PP-Gaming
+  url: http://www.gstatic.com/generate_204
+  interval: '300'
+# ======== GAMING SETTING
+
+# ======== BROWSING SETTING
+- name: 🔰 Browsing 🔰
+  type: load-balance
+  strategy: round-robin
+  disable-udp: false
+  use:
+  - PP-BROWSING
+  url: http://www.gstatic.com/generate_204
+  interval: '30'
+# ======== BROWSING SETTING
+
+# ======== BLOCK LIST SETTING
+- name: 🚫 BLOCK LIST
+  type: select
+  disable-udp: false
+  proxies:
+  - REJECT
+  - 🔰 Browsing 🔰
+  url: http://www.gstatic.com/generate_204
+  interval: '300'
+# ======== BLOCK LIST SETTING
+
+# ======== DIRECT ISP SETTING
+- name: DIRECT ISP1
+  interface-name: eth1
+  type: url-test
+  disable-udp: false
+  proxies:
+  - DIRECT
+  url: http://www.gstatic.com/generate_204
+  interval: '30'
+- name: DIRECT ISP2
+  interface-name: eth2
+  type: url-test
+  disable-udp: false
+  proxies:
+  - DIRECT
+  url: http://www.gstatic.com/generate_204
+  interval: '30'
+# ======== DIRECT ISP SETTING
+# ================ PROXY GROUPS SETTING
+
+dns:
+  nameserver:
+  - 8.8.8.8
+  - 8.8.4.4
+  - 94.140.14.15
+  - 94.140.15.16
+  - https://family.adguard-dns.com/dns-query
+  - tls://family.adguard-dns.com
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  listen: 0.0.0.0:7874
+  fake-ip-filter:
+  - "*.lan"
+  - "*.localdomain"
+  - "*.example"
+  - "*.invalid"
+  - "*.localhost"
+  - "*.test"
+  - "*.local"
+  - "*.home.arpa"
+  - time.*.com
+  - time.*.gov
+  - time.*.edu.cn
+  - time.*.apple.com
+  - time1.*.com
+  - time2.*.com
+  - time3.*.com
+  - time4.*.com
+  - time5.*.com
+  - time6.*.com
+  - time7.*.com
+  - ntp.*.com
+  - ntp1.*.com
+  - ntp2.*.com
+  - ntp3.*.com
+  - ntp4.*.com
+  - ntp5.*.com
+  - ntp6.*.com
+  - ntp7.*.com
+  - "*.time.edu.cn"
+  - "*.ntp.org.cn"
+  - "+.pool.ntp.org"
+  - time1.cloud.tencent.com
+  - music.163.com
+  - "*.music.163.com"
+  - "*.126.net"
+  - musicapi.taihe.com
+  - music.taihe.com
+  - songsearch.kugou.com
+  - trackercdn.kugou.com
+  - "*.kuwo.cn"
+  - api-jooxtt.sanook.com
+  - api.joox.com
+  - joox.com
+  - y.qq.com
+  - "*.y.qq.com"
+  - streamoc.music.tc.qq.com
+  - mobileoc.music.tc.qq.com
+  - isure.stream.qqmusic.qq.com
+  - dl.stream.qqmusic.qq.com
+  - aqqmusic.tc.qq.com
+  - amobile.music.tc.qq.com
+  - "*.xiami.com"
+  - "*.music.migu.cn"
+  - music.migu.cn
+  - "+.msftconnecttest.com"
+  - "+.msftncsi.com"
+  - msftconnecttest.com
+  - msftncsi.com
+  - localhost.ptlogin2.qq.com
+  - localhost.sec.qq.com
+  - "+.srv.nintendo.net"
+  - "*.n.n.srv.nintendo.net"
+  - "+.stun.playstation.net"
+  - xbox.*.*.microsoft.com
+  - "*.*.xboxlive.com"
+  - xbox.*.microsoft.com
+  - xnotify.xboxlive.com
+  - "+.battlenet.com.cn"
+  - "+.wotgame.cn"
+  - "+.wggames.cn"
+  - "+.wowsgame.cn"
+  - "+.wargaming.net"
+  - proxy.golang.org
+  - stun.*.*
+  - stun.*.*.*
+  - "+.stun.*.*"
+  - "+.stun.*.*.*"
+  - "+.stun.*.*.*.*"
+  - "+.stun.*.*.*.*.*"
+  - heartbeat.belkin.com
+  - "*.linksys.com"
+  - "*.linksyssmartwifi.com"
+  - "*.router.asus.com"
+  - mesu.apple.com
+  - swscan.apple.com
+  - swquery.apple.com
+  - swdownload.apple.com
+  - swcdn.apple.com
+  - swdist.apple.com
+  - lens.l.google.com
+  - stun.l.google.com
+  - "+.nflxvideo.net"
+  - "*.square-enix.com"
+  - "*.finalfantasyxiv.com"
+  - "*.ffxiv.com"
+  - "*.ff14.sdo.com"
+  - ff.dorado.sdo.com
+  - "*.mcdn.bilivideo.cn"
+  - "+.media.dssott.com"
+  - time-ios.apple.com
+  - shark007.net
+  fallback-filter:
+    geoip: true
+    geoip-code: ID
+    ipcidr:
+    - 0.0.0.0/8
+    - 10.0.0.0/8
+    - 100.64.0.0/10
+    - 127.0.0.0/8
+    - 169.254.0.0/16
+    - 172.16.0.0/12
+    - 192.0.0.0/24
+    - 192.0.2.0/24
+    - 192.88.99.0/24
+    - 192.168.0.0/16
+    - 198.18.0.0/15
+    - 198.51.100.0/24
+    - 203.0.113.0/24
+    - 224.0.0.0/4
+    - 240.0.0.0/4
+    - 255.255.255.255/32
+    domain:
+    - "+.google.com"
+    - "+.facebook.com"
+    - "+.youtube.com"
+    - "+.githubusercontent.com"
+    - "+.googlevideo.com"
+    - "+.msftconnecttest.com"
+    - "+.msftncsi.com"
+    - msftconnecttest.com
+    - msftncsi.com
+    - "+.*"
+  default-nameserver:
+  - 8.8.8.8
+  - 8.8.4.4
+  - 192.168.9.1
+  - 192.168.8.1
+  - 94.140.14.15
+  - 94.140.15.16
+
+redir-port: 7892
+tproxy-port: 7895
+port: 7890
+socks-port: 7891
+mixed-port: 7893
+mode: rule
+log-level: silent
+allow-lan: true
+external-controller: 0.0.0.0:9090
+secret: rtaserver
+bind-address: "*"
+external-ui: "/usr/share/openclash/ui"
+ipv6: false
+tcp-concurrent: true
+unified-delay: true
+geodata-mode: true
+geodata-loader: memconservative
+sniffer:
+  enable: true
+  sniffing:
+  - tls
+  - http
+  ForceDnsMapping: false
+  ParsePureIp: true
+  force-domain:
+  - "+.netflix.com"
+  - "+.nflxvideo.net"
+  - "+.amazonaws.com"
+  - "+.media.dssot.com"
+  skip-domain:
+  - "+.apple.com"
+  - Mijia Cloud
+  - "+.jd.com"
+  port-whitelist:
+  - 443
+  - 80
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+# ================ RULE SETTING
+rules:
+# ======== DIRECT RULE
+- RULE-SET,RP-Direct,✔️ Direct Mode
+# ======== DIRECT RULE
+
+# ======== BLOCK LIST RULE
+- GEOSITE,category-ads-all,🚫 BLOCK LIST
+- RULE-SET,RP-Reject,🚫 BLOCK LIST
+# ======== BLOCK LIST RULE
+
+# ======== GAMING RULE
+- AND,((DST-PORT,5000-5600/9992/10000-14000/15001-16999/17501-19000/17001-17499/22000-29000),(NETWORK,UDP)),🎮 Gaming UDP
+- AND,((RULE-SET,RP-PortGame),(NETWORK,UDP)),🎮 Gaming UDP
+# ======== GAMING RULE
+
+# ======== INDO ONLY RULE
+- RULE-SET,RP-Indo,❤️️ INDO ONLY
+- GEOIP,ID,❤️️ INDO ONLY
+# ======== INDO ONLY RULE
+
+- MATCH,GLOBAL
+# ================ RULE SETTING

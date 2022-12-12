@@ -1,0 +1,60 @@
+proxies:
+- name: ♻️ AKUN1 SANGGO XL1 ♻️
+  interface-name: eth1
+  server: 172.67.199.34
+  port: 443
+  type: trojan
+  password: eee31d40-6cde-11ed-8617-1577c1651679
+  network: ws
+  sni: id-sanggoro-jkt1.1server.co
+  skip-cert-verify: true
+  udp: true
+  ws-opts:
+    path: /howdy
+    headers:
+      Host: id-sanggoro-jkt1.1server.co
+
+- name: ♻️ AKUN1 HERZE XL1 ♻️
+  interface-name: eth1
+  server: 172.67.199.34
+  port: 443
+  type: trojan
+  password: 8603f900-7436-11ed-8e58-1577c1651679
+  network: ws
+  sni: id-herza1.1server.co
+  skip-cert-verify: true
+  udp: true
+  ws-opts:
+    path: /howdy
+    headers:
+      Host: id-herza1.1server.co
+
+- name: ♻️ AKUN1 SANGGO XL2 ♻️
+  interface-name: eth2
+  server: 172.67.199.34
+  port: 443
+  type: trojan
+  password: eee31d40-6cde-11ed-8617-1577c1651679
+  network: ws
+  sni: id-sanggoro-jkt1.1server.co
+  skip-cert-verify: true
+  udp: true
+  ws-opts:
+    path: /howdy
+    headers:
+      Host: id-sanggoro-jkt1.1server.co
+
+- name: ♻️ AKUN1 HERZE XL2 ♻️
+  interface-name: eth2
+  server: 172.67.199.34
+  port: 443
+  type: trojan
+  password: 8603f900-7436-11ed-8e58-1577c1651679
+  network: ws
+  sni: id-herza1.1server.co
+  skip-cert-verify: true
+  udp: true
+  ws-opts:
+    path: /howdy
+    headers:
+      Host: id-herza1.1server.co

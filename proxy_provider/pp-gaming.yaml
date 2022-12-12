@@ -1,0 +1,61 @@
+proxies:
+#isi akun tunnel
+- name: ♻️ GAMING XL1 ♻️
+  interface-name: eth1
+  server: 172.67.199.34
+  port: 443
+  type: trojan
+  password: 6f032ba0-462a-11ed-a7c2-1577c1651679
+  network: ws
+  sni: id-game.bypass.id
+  skip-cert-verify: true
+  udp: true
+  ws-opts:
+    path: /howdy
+    headers:
+      Host: id-game.bypass.id
+
+- name: ♻️ GAMING SG XL1 ♻️
+  interface-name: eth1
+  server: 172.67.199.34
+  port: 443
+  type: trojan
+  password: 8c91a440-6cde-11ed-b90b-1577c1651679
+  network: ws
+  sni: sg-game.1server.co
+  skip-cert-verify: true
+  udp: true
+  ws-opts:
+    path: /howdy
+    headers:
+      Host: sg-game.1server.co
+
+- name: ♻️ GAMING XL2 ♻️
+  interface-name: eth2
+  server: 172.67.199.34
+  port: 443
+  type: trojan
+  password: 6f032ba0-462a-11ed-a7c2-1577c1651679
+  network: ws
+  sni: id-game.bypass.id
+  skip-cert-verify: true
+  udp: true
+  ws-opts:
+    path: /howdy
+    headers:
+      Host: id-game.bypass.id
+
+- name: ♻️ GAMING SG XL2 ♻️
+  interface-name: eth2
+  server: 172.67.199.34
+  port: 443
+  type: trojan
+  password: 8c91a440-6cde-11ed-b90b-1577c1651679
+  network: ws
+  sni: sg-game.1server.co
+  skip-cert-verify: true
+  udp: true
+  ws-opts:
+    path: /howdy
+    headers:
+      Host: sg-game.1server.co
