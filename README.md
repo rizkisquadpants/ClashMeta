@@ -1,0 +1,2 @@
+# ClashMeta
+Config OpenClash Meta
