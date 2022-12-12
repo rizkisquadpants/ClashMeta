@@ -7,7 +7,7 @@
 
   <p align="center">
   <a target="_blank" href="https://github.com/rizkisquadpants/OpenClash/archive/refs/heads/main.zip">
-    <img src="https://img.shields.io/github/v/release/rizkisquadpants/OpenClash?style=for-the-badge&label=Download">
+    <img src="https://img.shields.io/github/v/release/rizkisquadpants/ClashMeta?style=for-the-badge&label=Download">
   </a>
   </p>
   
